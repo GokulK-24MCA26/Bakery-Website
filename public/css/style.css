@@ -1,0 +1,24 @@
+/* ── Typography ─────────────────────────────────────────── */
+:root {
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'Work Sans', system-ui, sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+}
+
+/* Display / headline elements */
+h1, h2, h3,
+.navbar-brand,
+.hero-title,
+.section-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+}
+
+/* Smaller headings stay body font for readability */
+h4, h5, h6 {
+    font-family: var(--font-body);
+    font-weight: 600;
+}
