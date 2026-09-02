@@ -1,0 +1,96 @@
+================================================================
+BAKERY - PROJECT OVERVIEW & TECHNOLOGIES USED
+================================================================
+
+PROJECT DESCRIPTION
+-------------------
+Bakery is a full-stack web application for an online bakery shop.
+It allows customers to browse bakery products by category, view a
+gallery, place orders, and contact the shop. Admins can manage
+products, categories, gallery images, and orders via a dashboard.
+
+================================================================
+TECHNOLOGIES USED
+================================================================
+
+BACKEND
+-------
+- PHP 8.3              : Server-side programming language
+- Laravel 13           : PHP web framework (MVC architecture)
+- Laravel Tinker       : REPL for interacting with the application
+- SQLite               : Lightweight file-based database
+- Eloquent ORM         : Laravel's database query builder & ORM
+
+FRONTEND
+--------
+- Blade                : Laravel's templating engine for views
+- Tailwind CSS v4      : Utility-first CSS framework for styling
+- Vite 8               : Frontend build tool & dev server
+- JavaScript           : Client-side scripting
+- Custom CSS           : Additional styles (admin.css, style.css, home.css)
+
+DEVELOPMENT TOOLS
+-----------------
+- Composer             : PHP dependency manager
+- NPM                  : Node.js package manager
+- Laravel Pint         : PHP code style fixer
+- Laravel Pail         : Real-time log viewer
+- PHPUnit 12           : PHP testing framework
+- Faker                : Fake data generator for testing/seeding
+- Mockery              : PHP mocking framework for tests
+- Concurrently         : Runs multiple dev processes simultaneously
+
+SERVER / ENVIRONMENT
+--------------------
+- Laragon              : Local development server environment (Windows)
+- Laravel Artisan      : CLI tool for running migrations, commands, etc.
+
+================================================================
+PROJECT STRUCTURE & FEATURES
+================================================================
+
+MODELS (Database Tables)
+------------------------
+- User          : Authentication & role management
+- categories    : Bakery product categories
+- Product       : Bakery products with details
+- Gallery       : Photo gallery images
+- Order         : Customer orders
+
+CONTROLLERS
+-----------
+- HomeController      : Landing page & product category pages
+- AuthController      : Login, register, logout
+- CategoriesController: Admin CRUD for categories
+- ProductsController  : Admin CRUD for products
+- GalleryController   : Public gallery & admin gallery management
+- OrderController     : Customer order placement & admin order management
+- ContactController   : Contact form handling
+
+PAGES / ROUTES
+--------------
+Public:
+  /                    Home page
+  /cakes               Cakes category
+  /cupcakes            Cupcakes category
+  /cookies             Cookies category
+  /breads              Breads category
+  /donuts-desserts     Donuts & Desserts category
+  /about               About page
+  /contact             Contact form
+  /gallery             Public photo gallery
+  /login               Login page
+  /register            Register page
+
+Authenticated Users:
+  /order/{product}     Place an order
+  /my-orders           View personal orders
+
+Admin (role: admin):
+  /admin/dashboard     Admin dashboard
+  /admin/categories    Manage categories (CRUD)
+  /admin/products      Manage products (CRUD)
+  /admin/gallery       Manage gallery (CRUD)
+  /admin/orders        View & manage all orders
+
+================================================================

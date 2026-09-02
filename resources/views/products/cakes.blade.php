@@ -48,16 +48,26 @@
                                 </div>
                             @endif
 
-                            <div class="card-body ">
-
-                                <h5 class="card-title cake-name mb-0">
+                            <div class="card-body">
+                                <h5 class="card-title cake-name mb-1">
                                     {{ preg_replace('/^[^a-zA-Z]+/', '', $cake->name) }}
                                 </h5>
-
-                                <p class="price">₹ {{ $cake->price }}</p>
-
-                                <span class="old-price">₹599</span>
-
+                                <p class="price mb-1">₹ {{ $cake->price }}</p>
+                                <div class="d-flex align-items-center gap-2 mt-2">
+                                    @auth
+                                        <a href="{{ route('orders.create', $cake) }}"
+                                           class="btn btn-sm w-100"
+                                           style="background:#B23A48;color:#fff;font-weight:600;border-radius:7px;font-size:13px;">
+                                            <i class="fa-solid fa-bag-shopping me-1"></i> Order Now
+                                        </a>
+                                    @else
+                                        <a href="{{ route('login') }}"
+                                           class="btn btn-sm w-100"
+                                           style="background:#B23A48;color:#fff;font-weight:600;border-radius:7px;font-size:13px;">
+                                            <i class="fa-solid fa-bag-shopping me-1"></i> Order Now
+                                        </a>
+                                    @endauth
+                                </div>
                             </div>
 
 

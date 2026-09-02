@@ -27,12 +27,21 @@
         <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
             <i class="fa-solid fa-bread-slice"></i> Products
         </a>
-        <a href="#" class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
+        <a href="{{ route('orders.index') }}"
+           class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
             <i class="fa-solid fa-bag-shopping"></i> Orders
         </a>
         <a href="{{ route('gallery.index') }}"
            class="nav-link {{ request()->routeIs('gallery.*') ? 'active' : '' }}">
             <i class="fa-solid fa-images"></i> Gallery
+        </a>
+        <a href="{{ route('admin.contacts.index') }}"
+           class="nav-link {{ request()->routeIs('admin.contacts.index') || request()->routeIs('admin.contacts.show') || request()->routeIs('admin.contacts.toggleRead') ? 'active' : '' }}">
+            <i class="fa-solid fa-envelope"></i> Contact Messages
+        </a>
+        <a href="{{ route('admin.contacts.settings') }}"
+           class="nav-link {{ request()->routeIs('admin.contacts.settings*') ? 'active' : '' }}">
+            <i class="fa-solid fa-address-book"></i> Contact Details
         </a>
     </nav>
 

@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'GMS Web Studio Bakery | Fresh Cakes & Bakery in Erode')
+
 @section('content')
-    @include('home.slide')
     @include('home.hero')
+    @include('home.stats')
     @include('home.categories')
     @include('home.featured')
-    @include('home.about-preview')
     @include('home.why-us')
-    @include('home.offers')
+    @include('home.about-preview')
     @include('home.gallery-preview')
     @include('home.testimonials')
-    @include('home.contact-preview')
+    @include('home.cta-banner')
 @endsection

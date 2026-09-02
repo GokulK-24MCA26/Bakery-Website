@@ -6,10 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Kasthuri Bakes - Fresh cakes, bakery items and snacks in Sathyamangalam.">
+    <meta name="description" content="GMS Web Studio Bakery - Fresh cakes, bakery items and snacks in Erode.">
 
     <title>
-        @yield('title', 'Kasthuri Bakes | Sathyamangalam')
+        @yield('title', 'GMS Web Studio Bakery')
     </title>
 
     {{-- Google Fonts --}}
@@ -34,6 +34,20 @@
 </head>
 
 <body>
+
+    {{-- =========================
+         SKELETON LOADING OVERLAY
+    ========================== --}}
+    <div class="skeleton-overlay" id="pageSkeleton" aria-hidden="true">
+        <div class="skeleton sk-nav"></div>
+        <div class="skeleton sk-hero"></div>
+        <div class="sk-grid">
+            <div class="skeleton sk-card"></div>
+            <div class="skeleton sk-card"></div>
+            <div class="skeleton sk-card"></div>
+            <div class="skeleton sk-card"></div>
+        </div>
+    </div>
 
     {{-- =========================
          NAVBAR

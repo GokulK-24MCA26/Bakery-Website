@@ -21,14 +21,17 @@ class AuthController extends Controller
             'password'=>'required'
         ]);
         $credentials=$request->only('email','password');
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($credentials, $request->boolean('remember'))){
+            $request->session()->regenerate();
             $role = Auth::user()->role;
             return $role === 'admin' ? redirect('/admin/dashboard') : redirect('/');
         }
         return redirect('/login')->with('error','Login Failed');
     }
-    public function logout(){
+    public function logout(Request $request){
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/login');
     }
     public function showregister(){
@@ -38,67 +41,15 @@ class AuthController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:5|confirmed',
-            'role'=>'required|in:employee,admin'
+            'password'=>'required|min:8|confirmed',
         ]);
-        $data=$request->only('name', 'email', 'password', 'role');
-        $data['password']=bcrypt($data['password']);
+        // 'password' => 'hashed' cast on User model handles hashing — do NOT bcrypt here
+        $data=$request->only('name', 'email', 'password');
+        $data['role']='customer';
         if(User::create($data)){
             return redirect('/login')->with('success', 'Registration Successful');
         }
         return redirect('/register')->with('error', 'Registration Failed');
 
-    }
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(auth $auth)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(auth $auth)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, auth $auth)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(auth $auth)
-    {
-        //
     }
 }

@@ -110,7 +110,7 @@
     .dropdown-menu {
         display: none;
         position: absolute;
-        top: calc(100% + 6px);
+        top: 100%;
         left: 0;
         min-width: 180px;
         background: #FFF8F0;
@@ -119,6 +119,17 @@
         padding: 6px;
         box-shadow: 0 8px 24px rgba(44, 24, 16, 0.12);
         z-index: 100;
+    }
+
+    /* Invisible bridge so the cursor can travel from the link
+       into the menu without the hover state being lost */
+    .dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        height: 10px;
     }
 
     .nav-links .dropdown:hover .dropdown-menu {
@@ -233,6 +244,10 @@
             display: block;
         }
 
+        .nav-links .dropdown.open .chevron {
+            transform: rotate(180deg);
+        }
+
         .btn-nav-login {
             margin: 10px 8px 0;
         }
@@ -244,7 +259,7 @@
 
         {{-- Brand --}}
         <a href="{{ route('home') }}" class="navbar-brand-link">
-            {{ config('app.name', 'Millhouse Bakery') }}
+            {{ config('app.name', 'GMS Bakery') }}
             <small>Fresh from the oven</small>
         </a>
 
@@ -261,15 +276,18 @@
             </li>
 
             <li class="dropdown">
-                <a href="#" class="nav-link dropdown-toggle">
+                <a href="{{ route('products.all') }}" class="nav-link dropdown-toggle {{ request()->routeIs('products.*') ? 'active' : '' }}" role="button" aria-haspopup="true"
+                    aria-expanded="false">
                     Products <span class="chevron">&#9660;</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/cakes">Cakes</a></li>
-                    <li><a class="dropdown-item" href="/cupcakes">Cupcakes</a></li>
-                    <li><a class="dropdown-item" href="/cookies">Cookies & Biscuits</a></li>
-                    <li><a class="dropdown-item" href="/breads">Breads & Pastries</a></li>
-                    <li><a class="dropdown-item" href="/donets&deserts">Donuts & Desserts</a></li>
+                    <li><a class="dropdown-item" href="{{ route('products.all') }}"><i class="fa-solid fa-border-all" style="margin-right:6px; opacity:.7;"></i> All Products</a></li>
+                    <li style="height:1px; background:#F0E4CC; margin:4px 8px;"></li>
+                    <li><a class="dropdown-item" href="{{ route('products.cakes') }}">Cakes</a></li>
+                    <li><a class="dropdown-item" href="{{ route('products.cupcakes') }}">Cupcakes</a></li>
+                    <li><a class="dropdown-item" href="{{ route('products.cookies') }}">Cookies & Biscuits</a></li>
+                    <li><a class="dropdown-item" href="{{ route('products.breads') }}">Breads & Pastries</a></li>
+                    <li><a class="dropdown-item" href="{{ route('products.donuts') }}">Donuts & Desserts</a></li>
                 </ul>
             </li>
 
@@ -312,13 +330,26 @@
 
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-    // Mobile dropdown toggle
+    // Dropdown toggle — desktop goes to /products on click; mobile first tap opens, second tap navigates
     document.querySelectorAll('.nav-links .dropdown .dropdown-toggle').forEach(toggle => {
         toggle.addEventListener('click', e => {
             if (window.innerWidth <= 768) {
-                e.preventDefault();
-                toggle.closest('.dropdown').classList.toggle('open');
+                const dropdown = toggle.closest('.dropdown');
+                const isOpen = dropdown.classList.contains('open');
+                if (!isOpen) {
+                    e.preventDefault();
+                    dropdown.classList.add('open');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+                // if already open, allow navigation to /products
             }
+        });
+    });
+
+    // Close mobile menu after tapping a real link
+    navLinks.querySelectorAll('a:not(.dropdown-toggle)').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) navLinks.classList.remove('open');
         });
     });
 </script>

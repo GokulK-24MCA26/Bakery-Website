@@ -1,6 +1,6 @@
 <style>
     /* ========================================
-   KASTHURI BAKES - FOOTER
+    GMS WEB STUDIO BAKERY - FOOTER
 ======================================== */
 
     .bakery-footer {
@@ -175,13 +175,13 @@
             {{-- Bakery Info --}}
             <div class="col-lg-4 col-md-6">
                 <h3 class="footer-logo">
-                    {{-- Kasthuri  --}}
+                    GMS Web Studio
                     <span>Bakes</span>
                 </h3>
 
                 <p class="footer-description">
                     Freshly baked with love every day. Enjoy delicious cakes,
-                    snacks and bakery favourites in Sathyamangalam.
+                    snacks and bakery favourites in Erode.
                 </p>
 
                 {{-- Social Media --}}
@@ -219,16 +219,20 @@
                 <h5 class="footer-title">Our Products</h5>
 
                 <ul class="footer-links">
-                    <li><a href="#">Birthday Cakes</a></li>
-                    <li><a href="#">Custom Cakes</a></li>
-                    <li><a href="#">Pastries</a></li>
-                    <li><a href="#">Cookies & Biscuits</a></li>
-                    <li><a href="#">Snacks & Puffs</a></li>
+                    <li><a href="{{ route('products.all') }}"><strong>All Products</strong></a></li>
+                    <li><a href="{{ route('products.cakes') }}">Cakes</a></li>
+                    <li><a href="{{ route('products.cupcakes') }}">Cupcakes</a></li>
+                    <li><a href="{{ route('products.cookies') }}">Cookies & Biscuits</a></li>
+                    <li><a href="{{ route('products.breads') }}">Breads & Pastries</a></li>
+                    <li><a href="{{ route('products.donuts') }}">Donuts & Desserts</a></li>
                 </ul>
             </div>
 
 
-            {{-- Contact --}}
+            {{-- Contact (dynamic from admin) --}}
+            @php
+                $_cd = $globalContactDetail ?? $contactDetail ?? null;
+            @endphp
             <div class="col-lg-3 col-md-6">
                 <h5 class="footer-title">Contact Us</h5>
 
@@ -237,30 +241,36 @@
                     <p>
                         <i class="fas fa-location-dot"></i>
                         <span>
-                            {{-- Kasthuri Bakes, --}}
+                            {{ $_cd->address_line1 ?? 'GMS Web Studio Bakery,' }}
                             <br>
-                            Sathyamangalam,<br>
-                            Tamil Nadu
+                            {{ $_cd->address_line2 ?? 'Erode, Tamil Nadu' }}
                         </span>
                     </p>
 
                     <p>
                         <i class="fas fa-phone"></i>
-                        <a href="tel:+91XXXXXXXXXX">
-                            +91 XXXXX XXXXX
+                        <a href="tel:{{ $_cd->phone_raw ?? '+91xxxxxxxxxx' }}">
+                            {{ $_cd->phone ?? '+91 xxxxx xxxxx' }}
                         </a>
                     </p>
 
                     <p>
                         <i class="fab fa-whatsapp"></i>
-                        <a href="#">
-                            WhatsApp Us
+                        <a href="{{ $_cd->whatsapp_url ?? 'https://wa.me/91xxxxxxxxxx' }}" target="_blank" rel="noopener">
+                            {{ $_cd->whatsapp_display ?? 'WhatsApp Us' }}
                         </a>
                     </p>
 
+                    @if(!empty($_cd->email))
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:{{ $_cd->email }}">{{ $_cd->email }}</a>
+                    </p>
+                    @endif
+
                     <p>
                         <i class="fas fa-clock"></i>
-                        <span>Open Daily</span>
+                        <span>{{ $_cd->hours_weekday ?? 'Open Daily' }}</span>
                     </p>
 
                 </div>
@@ -273,7 +283,7 @@
         <div class="footer-bottom">
 
             <p>
-                &copy; {{ date('Y') }} Kasthuri Bakes.
+                &copy; {{ date('Y') }} GMS Web Studio Bakery.
                 All Rights Reserved.
             </p>
 

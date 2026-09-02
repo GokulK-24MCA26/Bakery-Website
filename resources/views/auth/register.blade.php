@@ -345,15 +345,6 @@
                     @enderror
                 </div>
                 <div class="field">
-                    <label for="role">Role</label>
-                    <select id="role" name="role"
-                        style="width:100%;height:42px;padding:0 13px;border-radius:8px;border:1px solid var(--line);background:#FFFDF9;font-family:'Work Sans',sans-serif;font-size:14.5px;color:var(--ink);">
-                        <option value="employee" {{ old('role') == 'employee' ? 'selected' : '' }}>Employee</option>
-                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                    </select>
-                </div>
-
-                <div class="field">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password"
                         class="{{ $errors->has('password') ? 'invalid' : '' }}" placeholder="At least 8 characters"
