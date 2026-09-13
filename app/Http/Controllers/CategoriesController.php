@@ -25,8 +25,8 @@ class CategoriesController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        $number = categories::count() + 1;
-        $data = ['name' => $number . '. ' . $request->name];
+        // $number = categories::count() + 1;
+        $data = [$request->name];
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('categories', 'public');
