@@ -56,7 +56,10 @@ class ContactController extends Controller
     public function adminDestroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->route('admin.contacts.index')->with('success', 'Message deleted.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Message deleted.'
+        ]);
     }
 
     public function adminToggleRead(Contact $contact)

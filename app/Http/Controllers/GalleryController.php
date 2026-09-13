@@ -86,8 +86,8 @@ class GalleryController extends Controller
     public function destroy(Gallery $gallery)
     {
         $gallery->delete();
-        return redirect()->route('gallery.index')->with('success', 'Photo deleted.');
-    }
+        return response()->json(['success' => true,
+        'message'=>"gallery image deleted"]); }
 
     public function publicIndex()
     {
