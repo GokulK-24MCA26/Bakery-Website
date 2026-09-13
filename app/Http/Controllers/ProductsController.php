@@ -87,7 +87,10 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted.');
+        return  response()->json([
+            'success' => true,
+            'message' => 'Category deleted.'
+            ]);
     }
 
     public function show(Product $product) {}
